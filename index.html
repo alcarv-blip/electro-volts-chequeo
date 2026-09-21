@@ -1,25 +1,81 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07110f"><title>Chequeo de Seguridad Eléctrica | ELECTRO VOLTS</title><style>
-*{box-sizing:border-box}body{margin:0;background:#06100e;color:#f4f7f6;font:16px system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:680px;margin:auto;padding:22px}.brand{text-align:center;color:#f2c94c;font-weight:900;letter-spacing:2px}.brand small{display:block;color:#b9c7c2;font-size:10px;letter-spacing:1px}.hero{text-align:center;padding:45px 0}.badge{display:inline-block;padding:7px 12px;border:1px solid #38665a;border-radius:99px;color:#9de7c3;font-size:12px;font-weight:800}.hero h1{font-size:clamp(34px,9vw,58px);line-height:.98;letter-spacing:-2px}.hero p{color:#aebdb8;font-size:17px}.btn{width:100%;border:0;border-radius:15px;padding:16px;background:#f2c94c;color:#111;font-weight:900;font-size:16px;cursor:pointer}.card{background:#0d1b18;border:1px solid #23413a;border-radius:22px;padding:22px;margin:18px 0}.k{color:#f2c94c;font-size:12px;font-weight:900;letter-spacing:1px}.q{font-size:24px;font-weight:850;line-height:1.12;margin:8px 0}.d{color:#b8c6c1;font-size:14px}.opt{width:100%;text-align:left;margin-top:10px;padding:14px;border:1px solid #294a40;background:#0a1714;color:white;border-radius:14px;font-weight:700;cursor:pointer}.progress{height:7px;background:#18332c;border-radius:9px;margin:12px 0 20px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:#f2c94c;transition:.25s}.result{text-align:center}.light{width:85px;height:85px;border-radius:50%;margin:15px auto;box-shadow:0 0 45px currentColor}.green .light{background:#43d17c;color:#43d17c}.yellow .light{background:#f4c542;color:#f4c542}.red .light{background:#ff5b5b;color:#ff5b5b}.wa{display:block;background:#25d366;color:#06130d;text-decoration:none;padding:16px;border-radius:15px;font-weight:950;margin-top:18px}.note{font-size:12px;color:#81918c;margin-top:14px}footer{text-align:center;color:#81918c;font-size:12px;padding:30px}.hide{display:none}</style></head><body><main>
-<div class="brand">ELECTRO VOLTS<small>INGENIERÍA Y EJECUCIÓN ELÉCTRICA</small></div>
-<section class="hero" id="hero"><span class="badge">CHEQUEO GRATUITO · 10 PUNTOS</span><h1>¿TU CASA ESTÁ<br>REALMENTE PROTEGIDA?</h1><p>Hacé este chequeo orientativo y descubrí 10 puntos que deberías conocer de tu instalación eléctrica.</p><button class="btn" onclick="start()">EMPEZAR CHEQUEO GRATUITO</button><div class="note">No necesitás abrir el tablero ni tocar ningún cable.</div></section>
-<section id="app" class="hide"><div id="count"></div><div class="progress"><i id="bar"></i></div><div id="box"></div></section>
-<section id="res" class="card result hide"><div class="light"></div><div class="k">RESULTADO DEL CHEQUEO</div><h2 id="rt"></h2><p id="rx"></p><a class="wa" id="wa">💬 CONSULTAR GRATIS POR WHATSAPP</a><div class="note">*El chequeo es orientativo y no reemplaza una inspección eléctrica profesional.</div></section>
-<footer><b>Alejandro C.</b><br>Electricidad Industrial y Domiciliaria<br><br>ELECTRO VOLTS</footer></main>
-<script>
-const qs=[
-["DISYUNTOR DIFERENCIAL","¿Tenés disyuntor diferencial en tu tablero?","Es una protección fundamental frente a fugas de corriente. El botón TEST permite comprobar su mecanismo según el fabricante.",["Sí, y sé que funciona","Sí, pero no sé si funciona","No lo sé","No"]],
-["SECCIÓN DE LOS CABLES","¿Sabés qué sección tienen los cables de los circuitos principales?","La sección depende de la corriente, longitud, instalación y carga prevista.",["Sí, está verificada","Creo que sí","No lo sé","Creo que puede estar mal"]],
-["ENCHUFES Y CONEXIONES","¿Hay enchufes o conexiones que se calientan?","Calor anormal, olor a plástico, marcas oscuras, chispas o zumbidos son señales para revisar.",["No","Alguno se calienta","Sí, bastante","No lo sé"]],
-["TÉRMICA Y CONEXIONES","¿Sabés si tu térmica es adecuada para el circuito que protege?","Debe estar coordinada con conductores, instalación y carga. Que no dispare no significa que todo esté bien.",["Sí, fue verificado","Creo que sí","No lo sé","Tengo dudas o problemas frecuentes"]],
-["PUESTA A TIERRA","¿Sabés si tu puesta a tierra está realmente verificada?","Tener una jabalina no demuestra por sí solo que la puesta a tierra sea correcta.",["Sí, fue medida/verificada","Hay jabalina, pero no sé si fue medida","No lo sé","Creo que no está correcta"]],
-["PROTECCIONES DEL TABLERO","¿Tu tablero tiene las protecciones adecuadas para tu instalación?","Importan las protecciones, los conductores, conexiones y el estado general.",["Sí, fue revisado","Creo que sí","No lo sé","Tengo dudas"]],
-["SOBRECARGA","¿Tenés demasiados artefactos conectados a un mismo toma o circuito?","TV, heladera, cargadores, zapatillas y alargues pueden concentrar carga. El problema depende de carga, conductores, contactos y estado.",["No","A veces","Sí, bastante","No lo sé"]],
-["TEST DEL DIFERENCIAL","¿Hace cuánto probaste el botón TEST de tu disyuntor?","Muchos fabricantes recomiendan pruebas periódicas, a menudo mensuales. Seguí las indicaciones del fabricante.",["Hace poco","Hace varios meses","Nunca","No sé dónde está"]],
-["EMPALMES Y CONEXIONES","¿Tenés empalmes o conexiones deterioradas?","Conexiones flojas, aislaciones dañadas, cajas deterioradas o marcas de calentamiento requieren revisión.",["No que yo sepa","Puede haber alguno","Sí","No lo sé"]],
-["ÚLTIMA REVISIÓN","¿Cuándo fue la última revisión de tu instalación eléctrica?","Una instalación puede haber cambiado después de agregar equipos, circuitos o aumentar la demanda.",["Hace menos de 1 año","Hace varios años","Nunca","No lo sé"]]
-];
-let n=0,a=[];function start(){hero.classList.add("hide");app.classList.remove("hide");render()}
-function render(){if(n===10)return finish();let x=qs[n];count.textContent=`CHEQUEO ${n+1} / 10`;bar.style.width=`${n*10}%`;box.innerHTML=`<div class="card"><div class="k">${String(n+1).padStart(2,"0")} · ${x[0]}</div><div class="q">${x[1]}</div><div class="d">${x[2]}</div>${x[3].map((o,i)=>`<button class="opt" onclick="ans(${i})">${o}</button>`).join("")}</div>`}
-function ans(i){a[n]=i;n++;render();scrollTo({top:0,behavior:"smooth"})}
-function finish(){app.classList.add("hide");let r=0;a.forEach((v,i)=>{let bad=[0,1,2,3][v];if(i==2||i==6||i==7||i==8||i==9)bad=[0,1,3,2][v];r+=bad});let c,t,x;if(r<=5){c="green";t="VERDE — SIN SEÑALES EVIDENTES";x="En este chequeo no aparecen señales evidentes de alerta. Eso no certifica la seguridad de la instalación, pero es un buen punto de partida."}else if(r<=13){c="yellow";t="ATENCIÓN — HAY PUNTOS PARA REVISAR";x="Aparecieron uno o más puntos que conviene conocer mejor. Una revisión profesional puede ayudarte a confirmar el estado real."}else{c="red";t="REVISAR — CONVIENE ACTUAR";x="Aparecieron varias señales que justifican una revisión eléctrica. Ante calentamiento, olor a quemado, chispas o conductores dañados, evitá usar el punto afectado y buscá asistencia profesional."}res.className=`card result ${c}`;rt.textContent=t;rx.textContent=x;wa.href="https://wa.me/5492944713310?text="+encodeURIComponent("Hola Alejandro. Hice el Chequeo de Seguridad Eléctrica del Hogar y quisiera consultar sobre mi instalación.");scrollTo({top:0,behavior:"smooth"})}
-</script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#06110f">
+  <meta name="description" content="Chequeo orientativo de riesgo eléctrico en 10 puntos. Electro Volts.">
+  <title>Electro Volts | Chequeo Eléctrico Nivel 2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="brand">
+      <div class="brand-name">ELECTRO VOLTS</div>
+      <div class="brand-sub">INGENIERÍA Y EJECUCIÓN ELÉCTRICA</div>
+    </header>
+
+    <section id="intro" class="screen active">
+      <div class="pill">CHEQUEO ELÉCTRICO · 10 PUNTOS</div>
+      <h1>¿QUÉ TAN SEGURA<br>ESTÁ TU INSTALACIÓN?</h1>
+      <p class="lead">Respondé estas 10 preguntas y obtené una orientación rápida sobre posibles puntos de atención en tu instalación eléctrica.</p>
+
+      <div class="notice">
+        <strong>Chequeo orientativo</strong>
+        <span>No necesitás abrir el tablero ni tocar ningún cable.</span>
+      </div>
+
+      <button id="startBtn" class="primary">EMPEZAR CHEQUEO</button>
+      <p class="small">Las respuestas no reemplazan una inspección técnica profesional.</p>
+    </section>
+
+    <section id="quiz" class="screen">
+      <div class="quiz-top">
+        <span id="counter">CHEQUEO 1 / 10</span>
+        <span id="scoreMini">0 pts</span>
+      </div>
+      <div class="progress"><div id="progressBar"></div></div>
+
+      <article class="question-card">
+        <div class="question-tag" id="questionTag">01 · TABLERO ELÉCTRICO</div>
+        <h2 id="question"></h2>
+        <p id="explanation"></p>
+        <div id="answers" class="answers"></div>
+      </article>
+    </section>
+
+    <section id="result" class="screen">
+      <div class="result-kicker">RESULTADO DEL CHEQUEO</div>
+      <div id="resultIcon" class="result-icon">!</div>
+      <h1 id="resultTitle"></h1>
+      <div class="score-box">
+        <span id="resultScore">0</span>
+        <small>/ 30</small>
+      </div>
+      <p id="resultText" class="lead"></p>
+
+      <div class="result-list">
+        <h3>¿Qué significa?</h3>
+        <p id="resultAdvice"></p>
+      </div>
+
+      <div class="cta">
+        <strong>¿Querés saber cómo está realmente tu instalación?</strong>
+        <span>Una revisión en el lugar permite comprobar lo que un cuestionario no puede detectar.</span>
+        <a id="whatsappBtn" class="primary" href="#" target="_blank" rel="noopener">SOLICITAR REVISIÓN</a>
+      </div>
+
+      <button id="restartBtn" class="secondary">HACER EL CHEQUEO OTRA VEZ</button>
+      <p class="small">Electro Volts · Electricidad Industrial y Domiciliaria</p>
+    </section>
+
+    <footer>
+      <strong>Alejandro C.</strong><br>
+      Electricidad Industrial y Domiciliaria<br>
+      <span>ELECTRO VOLTS</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
